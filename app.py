@@ -7,8 +7,10 @@ import io
 #temp=pathlib.PosixPath
 #pathlib.PosixPath=pathlib.WindowsPath
 plt=platform.system()
-if plt =="Windows" or plt == "Darwin":
-  pathlib.WindowsPath=pathlib.PosixPath
+if plt == "Windows":
+    PathClass = pathlib.WindowsPath
+else:
+    PathClass = pathlib.PosixPath
 # title
 st.title("Transportni klassifikatsiya qiluvchi model")
 
