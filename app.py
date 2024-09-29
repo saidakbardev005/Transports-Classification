@@ -14,8 +14,8 @@ st.title("Transportni klassifikatsiya qiluvchi model")
 file=st.file_uploader("Rasm yuklash", type=["png","jpeg","gif","svg"])
 
 #PIL convert
-img=PILImage.create(file)
-if file is not None: 
+#img=PILImage.create(file)
+if file: 
     st.image(file)
     #PIL convert
     img=PILImage.create(file)
