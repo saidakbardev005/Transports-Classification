@@ -13,17 +13,15 @@ st.title("Transportni klassifikatsiya qiluvchi model")
 # rasmni joylash
 file=st.file_uploader("Rasm yuklash", type=["png","jpeg","gif","svg"])
 
-#PIL convert
-#img=PILImage.create(file)
 if file: 
     st.image(file)
     #PIL convert
-    img=PILImage.create(file)
+    image=PILImage.create(file)
     #model
     model=load_learner("Transport_model.pkl")
 
     #prediction
-    pred,pred_id,probs=model.predict(img)
+    pred,pred_id,probs=model.predict(image)
     st.success(f"Bashorat: {pred}") 
     st.info(f"Ehtimollik: {probs[pred_id]*100:.1f}%")
 
