@@ -3,9 +3,8 @@ from fastai.vision.all import *
 import plotly.express as px
 import pathlib
 import platform
-#temp=pathlib.PosixPath
-#pathlib.PosixPath=pathlib.WindowsPath
-plt=platform.system()
+
+pl t= platform.system()
 if plt == "Windows":pathlib.WindowsPath = pathlib.PosixPath
     
 # title
