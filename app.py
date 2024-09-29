@@ -3,14 +3,11 @@ from fastai.vision.all import *
 import plotly.express as px
 import pathlib
 import platform
-import io
 #temp=pathlib.PosixPath
 #pathlib.PosixPath=pathlib.WindowsPath
 plt=platform.system()
-if plt == "Windows":
-    PathClass = pathlib.WindowsPath
-else:
-    PathClass = pathlib.PosixPath
+if plt == "Linux":pathlib.WindowsPath = pathlib.PosixPath
+    
 # title
 st.title("Transportni klassifikatsiya qiluvchi model")
 
@@ -19,8 +16,7 @@ file=st.file_uploader("Rasm yuklash", type=["png","jpeg","gif","svg"])
 
 #PIL convert
 img=PILImage.create(file)
-try:
-  if file: 
+if file: 
     st.image(file)
     #model
     model=load_learner("Transport_model.pkl")
@@ -33,7 +29,3 @@ try:
     # plotting
     fig=px.bar(x=probs*100, y=model.dls.vocab)
     st.plotly_chart(fig)
-  else:
-    st.write("Iltimos, rasm yuklang.")
-except Exception as e:
-    st.error(f"Xatolik yuz berdi: {e}")
