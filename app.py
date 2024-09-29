@@ -1,32 +1,37 @@
-import streamlit as st  
+import streamlit as st
 from fastai.vision.all import *
 import plotly.express as px
-import pathlib
-import platform
 
-plt= platform.system()
+model_path = st.text_input("Model Path", "Transport_model.pkl")  # User-specified model path
 
-if plt == "Linux":
-    pathlib.WindowsPath = pathlib.PosixPath
-    
-# title
 st.title("Transportni klassifikatsiya qiluvchi model")
 
-# rasmni joylash
-file=st.file_uploader("Rasm yuklash", type=["png","jpeg","gif","svg"])
+uploaded_image = st.file_uploader("Rasm yuklash", type=["png", "jpeg", "gif", "svg"])
 
-if file is not None: 
-    st.image(file)
-    #PIL convert
-    image=PILImage.create(file)
-    #model
-    model=load_learner("Transport_model.pkl")
+if uploaded_image is not None:
+    try:
+        st.image(uploaded_image)
 
-    #prediction
-    pred,pred_id,probs=model.predict(image)
-    st.success(f"Bashorat: {pred}") 
-    st.info(f"Ehtimollik: {probs[pred_id]*100:.1f}%")
+        # Convert to PIL image
+        image = PILImage.create(uploaded_image)
 
-    # plotting
-    fig=px.bar(x=probs*100, y=model.dls.vocab)
-    st.plotly_chart(fig)
+        # Load the model (handle potential errors)
+        model = load_learner(model_path)
+
+        # Make prediction
+        pred, pred_id, probs = model.predict(image)
+        st.success(f"Bashorat: {pred}")
+        st.info(f"Ishonchlilik: {probs[pred_id]*100:.1f}%")
+
+        # Create bar chart
+        fig = px.bar(x=probs * 100, y=model.dls.vocab)
+        st.plotly_chart(fig)
+    except Exception as e:
+        st.error("Xatolik yuz berdi:")
+        # Provide specific error messages here, e.g.,
+        if "Could not load file" in str(e):
+            st.error("Model fayli topilmadi yoki noto'g'ri yuklandi.")
+        elif "Invalid image format" in str(e):
+            st.error("Rasm fayli noto'g'ri formatda. Faqat PNG, JPEG, GIF va SVG formatlarini qabul qiladi.")
+        else:
+            st.error(f"Noma'lum xatolik: {e}")
