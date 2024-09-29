@@ -1,7 +1,7 @@
 import streamlit as st  
 from fastai.vision.all import *
 import plotly.express as px
-import pathlib 
+import pathlib as Path
 import platform
 current_path = Path('.')
 print(current_path)
