@@ -6,7 +6,7 @@ import platform
 #temp=pathlib.PosixPath
 #pathlib.PosixPath=pathlib.WindowsPath
 plt=platform.system()
-if plt =="Linux":pathlib.windowspath=pathlib.Posixpath
+if plt =="Linux":pathlib.windowspath=pathlib.PosixPath
 # title
 st.title("Transportni klassifikatsiya qiluvchi model")
 
