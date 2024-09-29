@@ -6,7 +6,8 @@ import platform
 temp=pathlib.PosixPath
 pathlib.PosixPath=pathlib.WindowsPath
 plt=platform.system()
-if plt =="Linux":pathlib.WindowsPath=pathlib.PosixPath
+if plt =="Linux":
+  pathlib.WindowsPath=pathlib.PosixPath
 # title
 st.title("Transportni klassifikatsiya qiluvchi model")
 
@@ -29,3 +30,5 @@ if file:
   # plotting
   fig=px.bar(x=probs*100, y=model.dls.vocab)
   st.plotly_chart(fig)
+else:
+  st.write("Iltimos, rasm yuklang.")
