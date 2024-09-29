@@ -5,8 +5,12 @@ import pathlib as Path
 import platform
 current_path = Path('.')
 print(current_path)
+
 plt= platform.system()
-if plt == "Windows":pathlib.WindowsPath = pathlib.PosixPath
+
+if plt == "Windows":
+    import pathlib
+    pathlib.WindowsPath = pathlib.PosixPath
     
 # title
 st.title("Transportni klassifikatsiya qiluvchi model")
