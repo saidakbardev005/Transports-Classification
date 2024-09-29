@@ -3,6 +3,7 @@ from fastai.vision.all import *
 import plotly.express as px
 import pathlib
 import platform
+import io
 
 plt= platform.system()
 if plt == "Windows":pathlib.WindowsPath = pathlib.PosixPath
@@ -14,8 +15,9 @@ st.title("Transportni klassifikatsiya qiluvchi model")
 file=st.file_uploader("Rasm yuklash", type=["png","jpeg","gif","svg"])
 
 #PIL convert
-img=PILImage.create(file)
-if file: 
+#img=PILImage.create(file)
+if file is not None: 
+    img = PILImage.create(io.BytesIO(file.read()))
     st.image(file)
     #model
     model=load_learner("Transport_model.pkl")
