@@ -3,7 +3,8 @@ from fastai.vision.all import *
 import plotly.express as px
 import pathlib as Path
 import platform
-
+current_path = Path('.')
+print(current_path)
 plt= platform.system()
 if plt == "Windows":pathlib.WindowsPath = pathlib.PosixPath
     
@@ -13,7 +14,7 @@ st.title("Transportni klassifikatsiya qiluvchi model")
 # rasmni joylash
 file=st.file_uploader("Rasm yuklash", type=["png","jpeg","gif","svg"])
 
-if file: 
+if file is not None: 
     st.image(file)
     #PIL convert
     image=PILImage.create(file)
