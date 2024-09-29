@@ -20,7 +20,6 @@ file=st.file_uploader("Rasm yuklash", type=["png","jpeg","gif","svg"])
 #PIL convert
 img=PILImage.create(file)
 try:
-  
   if file: 
     st.image(file)
     #model
