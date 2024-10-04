@@ -5,7 +5,8 @@ import plotly.express as px
 model_path = st.text_input("Model Path", "Transport_model.pkl")  # User-specified model path
 
 st.title("Transportni klassifikatsiya qiluvchi model")
-st.title("""Ular:\n1.Mashinalar
+st.title("""Ular:
+1.Mashinalar
 2.Samalyotlar
 3.Kemalar""")
 
